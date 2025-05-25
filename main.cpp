@@ -29,7 +29,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*20,position.y*30,WHITE);
+        DrawTexture(texture,position.x*20,position.y*35,WHITE);
 
     }
 
@@ -57,7 +57,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*120,position.y*10,WHITE);
+        DrawTexture(texture,position.x*100,position.y*10,WHITE);
 
     }
 
@@ -86,7 +86,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*220,position.y*30,WHITE);
+        DrawTexture(texture,position.x*220,position.y*35,WHITE);
 
     }
 
@@ -114,7 +114,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*320,position.y*63,WHITE);
+        DrawTexture(texture,position.x*340,position.y*60,WHITE);
 
     }
 
@@ -143,7 +143,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*10,position.y*73,WHITE);
+        DrawTexture(texture,position.x*10,position.y*75,WHITE);
 
     }
 
@@ -171,7 +171,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*60,position.y*75,WHITE);
+        DrawTexture(texture,position.x*65,position.y*75,WHITE);
 
     }
 
@@ -199,7 +199,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*60,position.y*3,WHITE);
+        DrawTexture(texture,position.x*60,position.y*5,WHITE);
 
     }
 
@@ -227,7 +227,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*60,position.y*32,WHITE);
+        DrawTexture(texture,position.x*60,position.y*33,WHITE);
 
     }
 
@@ -255,7 +255,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*360,position.y*3,WHITE);
+        DrawTexture(texture,position.x*360,position.y*2,WHITE);
 
     }
 
@@ -283,7 +283,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*385,position.y*3,WHITE);
+        DrawTexture(texture,position.x*385,position.y*2,WHITE);
 
     }
 
@@ -311,7 +311,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*410,position.y*3,WHITE);
+        DrawTexture(texture,position.x*410,position.y*2,WHITE);
 
     }
 
@@ -339,7 +339,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*435,position.y*3,WHITE);
+        DrawTexture(texture,position.x*435,position.y*2,WHITE);
 
     }
 
@@ -367,7 +367,287 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*460,position.y*3,WHITE);
+        DrawTexture(texture,position.x*460,position.y*2,WHITE);
+
+    }
+
+
+
+
+};
+class s1
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    s1()
+    {
+        Image image = LoadImage("gg/s1.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~s1()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+
+    }
+
+
+
+
+};
+class s2
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    s2()
+    {
+        Image image = LoadImage("gg/s2.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~s2()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+
+    }
+
+
+
+
+};
+class s3
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    s3()
+    {
+        Image image = LoadImage("gg/s3.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~s3()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+
+    }
+
+
+
+
+};
+class s4
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    s4()
+    {
+        Image image = LoadImage("gg/s4.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~s4()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+
+    }
+
+
+
+
+};
+class s5
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    s5()
+    {
+        Image image = LoadImage("gg/s5.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~s5()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+
+    }
+
+
+
+
+};
+class ss1
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    ss1()
+    {
+        Image image = LoadImage("gg/s1.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~ss1()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*90,position.y*72,WHITE);
+
+    }
+
+
+
+
+};
+class ss2
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    ss2()
+    {
+        Image image = LoadImage("gg/s2.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~ss2()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*90,position.y*72,WHITE);
+
+    }
+
+
+
+
+};
+class ss3
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    ss3()
+    {
+        Image image = LoadImage("gg/s3.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~ss3()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*90,position.y*72,WHITE);
+
+    }
+
+
+
+
+};
+class ss4
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    ss4()
+    {
+        Image image = LoadImage("gg/s4.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~ss4()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*90,position.y*72,WHITE);
+
+    }
+
+
+
+
+};
+class ss5
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    ss5()
+    {
+        Image image = LoadImage("gg/s5.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~ss5()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*90,position.y*72,WHITE);
 
     }
 
@@ -394,6 +674,16 @@ int main ()
     red3 Rad3 = red3();
     red4 Rad4 = red4();
     red5 Rad5 = red5();
+    s1 S1 = s1();
+    s2 S2 = s2();
+    s3 S3 = s3();
+    s4 S4 = s4();
+    s5 S5 = s5();
+    ss1 Ss1 = ss1();
+    ss2 Ss2 = ss2();
+    ss3 Ss3 = ss3();
+    ss4 Ss4 = ss4();
+    ss5 Ss5 = ss5();
 
     while (WindowShouldClose () == false)
     {
@@ -413,6 +703,16 @@ int main ()
         Rad3.Draw();
         Rad4.Draw();
         Rad5.Draw();
+        // S1.Draw();
+        // S2.Draw();
+        // S3.Draw();
+        // S4.Draw();
+        S5.Draw();
+        // Ss1.Draw();
+        // Ss2.Draw();
+        // Ss3.Draw();
+        // Ss4.Draw();
+        Ss5.Draw();
         EndDrawing ();
 
 
