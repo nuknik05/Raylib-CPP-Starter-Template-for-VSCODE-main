@@ -8,6 +8,23 @@ Color lightBlue = {226, 240, 243, 255};
 int cellSize = 30;
 // int cellSize2 = 9;
 int cellCount = 25;
+double lastupdatetime=0;
+
+bool evenTriggered(double interval)
+{
+    double currentTime = GetTime();
+    if(currentTime - lastupdatetime>=interval){
+        lastupdatetime = currentTime;
+        return true;
+    }
+    return false;
+}
+
+int getRandomYPosition()
+{
+    int choices[3] = {60, 160, 380};
+    return (float)choices[GetRandomValue(0, 2)];
+}
 
 class doraemon
 {
@@ -37,7 +54,7 @@ public :
 
 
 };
-class dora
+class dora//dorayaki
 {
 public :
     Vector2 position ={2,6};
@@ -49,6 +66,7 @@ public :
         Image image = LoadImage("gg/dora.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
+        position.y = getRandomYPosition();
 
     }
     ~dora()
@@ -60,13 +78,18 @@ public :
         DrawTexture(texture,position.x*100,position.y*10,WHITE);
 
     }
+    void Update_dora()
+    {
+        position.x-=0.01;
+        
+    }
 
 
 
 
 };
 
-class nobe
+class nobe //nobita
 {
 public :
     Vector2 position ={2,6};
@@ -78,6 +101,7 @@ public :
         Image image = LoadImage("gg/nobe.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
+        position.y = getRandomYPosition();
 
     }
     ~nobe()
@@ -89,7 +113,11 @@ public :
         DrawTexture(texture,position.x*220,position.y*35,WHITE);
 
     }
-
+    void Update_nobe()
+    {
+        position.x-=0.01;
+        
+    }
 
 
 
@@ -106,6 +134,7 @@ public :
         Image image = LoadImage("gg/rat.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
+        position.y = getRandomYPosition();
 
     }
     ~rat()
@@ -116,6 +145,11 @@ public :
     {
         DrawTexture(texture,position.x*340,position.y*60,WHITE);
 
+    }
+    void Update_rat()
+    {
+        position.x-=0.01;
+        
     }
 
 
@@ -173,6 +207,10 @@ public :
     {
         DrawTexture(texture,position.x*65,position.y*75,WHITE);
 
+    }
+    void Update_che()
+    {
+        position.x-=1;
     }
 
 
@@ -655,6 +693,25 @@ public :
 
 
 };
+class game{
+public:
+    doraemon Doraemon = doraemon();
+    dora Dora = dora();
+    nobe Nobe = nobe();
+    rat Rat = rat ();
+    che Che = che();
+
+    void update(){
+        Dora.Update_dora();
+        Nobe.Update_nobe();
+        Rat.Update_rat();
+        Che.Update_che();
+    }
+    void CheckcollisionWithFood(){
+        //mon y 0 6 12
+        
+    }
+};
 int main () 
 {
     cout << "starting the game..."<< endl;
@@ -684,9 +741,54 @@ int main ()
     ss3 Ss3 = ss3();
     ss4 Ss4 = ss4();
     ss5 Ss5 = ss5();
+    game Game = game();
 
     while (WindowShouldClose () == false)
     {
+        // if()
+        if(evenTriggered(0.01)){
+            Dora.Update_dora();
+            Rat.Update_rat();
+            Nobe.Update_nobe();
+        }
+        if(IsKeyPressed(KEY_W)){
+            Doraemon.position.y-=6;
+        }
+        if(IsKeyPressed(KEY_S)){
+            Doraemon.position.y+=6;
+        }
+        if(Nobe.position.x<=0.65){
+            Nobe.position.x+=8;
+            
+            float oldY = Nobe.position.y;
+            float newY;
+            do {
+                newY = getRandomYPosition();
+            } while (newY == oldY);
+            Nobe.position.y = newY;
+        }
+        if(Dora.position.x<=0.66){
+            Dora.position.x+=8;
+            float oldY = Dora.position.y;
+            float newY;
+            do {
+                newY = getRandomYPosition();
+            } while (newY == oldY);
+            Dora.position.y = newY;
+            //cout<<Dora.position.x<<endl;
+        }
+        if(Rat.position.x<=0.65){
+            Rat.position.x += 10;
+            float oldY = Rat.position.y;
+            float newY;
+            do {
+                newY = getRandomYPosition();
+            } while (newY == oldY);
+            Rat.position.y = newY;
+        }
+        //บน 60 กลาง 180 ล่าง 378
+        
+        //3.Drawing
         BeginDrawing();
 
         ClearBackground(lightBlue);
