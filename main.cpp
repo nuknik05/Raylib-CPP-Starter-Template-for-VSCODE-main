@@ -57,7 +57,7 @@ public :
 class dora//dorayaki
 {
 public :
-    Vector2 position ={2,6};
+    Vector2 position ={300,60};
     Texture2D texture;
    
 
@@ -75,12 +75,12 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*100,position.y*10,WHITE);
+        DrawTexture(texture,position.x,position.y,WHITE);
 
     }
     void Update_dora()
     {
-        position.x-=0.01;
+       position.x-=0.01;
         
     }
 
@@ -92,7 +92,7 @@ public :
 class nobe //nobita
 {
 public :
-    Vector2 position ={2,6};
+    Vector2 position ={400,200};
     Texture2D texture;
    
 
@@ -110,12 +110,12 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*220,position.y*35,WHITE);
+        DrawTexture(texture,position.x,position.y,WHITE);
 
     }
     void Update_nobe()
     {
-        position.x-=0.01;
+      position.x-=0.01;
         
     }
 
@@ -125,7 +125,7 @@ public :
 class rat
 {
 public :
-    Vector2 position ={2,6};
+    Vector2 position ={600,340};
     Texture2D texture;
    
 
@@ -143,12 +143,12 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*340,position.y*60,WHITE);
+        DrawTexture(texture,position.x,position.y,WHITE);
 
     }
     void Update_rat()
     {
-        position.x-=0.01;
+       position.x-=0.01;
         
     }
 
@@ -177,7 +177,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*10,position.y*75,WHITE);
+        DrawTexture(texture,position.x*400,position.y*75,WHITE);
 
     }
 
@@ -205,7 +205,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*65,position.y*75,WHITE);
+        DrawTexture(texture,position.x*450,position.y*75,WHITE);
 
     }
     void Update_che()
@@ -265,7 +265,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*60,position.y*33,WHITE);
+        DrawTexture(texture,position.x*60,position.y*30,WHITE);
 
     }
 
@@ -433,7 +433,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+        DrawTexture(texture,position.x*430,position.y*75,WHITE);
 
     }
 
@@ -461,7 +461,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+        DrawTexture(texture,position.x*430,position.y*75,WHITE);
 
     }
 
@@ -489,7 +489,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+        DrawTexture(texture,position.x*430,position.y*75,WHITE);
 
     }
 
@@ -517,7 +517,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+        DrawTexture(texture,position.x*430,position.y*75,WHITE);
 
     }
 
@@ -545,7 +545,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*40,position.y*72,WHITE);
+        DrawTexture(texture,position.x*430,position.y*75,WHITE);
 
     }
 
@@ -562,7 +562,7 @@ public :
 
     ss1()
     {
-        Image image = LoadImage("gg/s1.png");
+        Image image = LoadImage("gg/ss1.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
 
@@ -573,7 +573,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*90,position.y*72,WHITE);
+        DrawTexture(texture,position.x*475,position.y*75,WHITE);
 
     }
 
@@ -590,7 +590,7 @@ public :
 
     ss2()
     {
-        Image image = LoadImage("gg/s2.png");
+        Image image = LoadImage("gg/ss2.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
 
@@ -601,7 +601,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*90,position.y*72,WHITE);
+        DrawTexture(texture,position.x*475,position.y*75,WHITE);
 
     }
 
@@ -618,7 +618,7 @@ public :
 
     ss3()
     {
-        Image image = LoadImage("gg/s3.png");
+        Image image = LoadImage("gg/ss3.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
 
@@ -629,7 +629,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*90,position.y*72,WHITE);
+        DrawTexture(texture,position.x*475,position.y*75,WHITE);
 
     }
 
@@ -646,7 +646,7 @@ public :
 
     ss4()
     {
-        Image image = LoadImage("gg/s4.png");
+        Image image = LoadImage("gg/ss4.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
 
@@ -657,7 +657,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*90,position.y*72,WHITE);
+        DrawTexture(texture,position.x*475,position.y*75,WHITE);
 
     }
 
@@ -674,7 +674,7 @@ public :
 
     ss5()
     {
-        Image image = LoadImage("gg/s5.png");
+        Image image = LoadImage("gg/ss5.png");
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
 
@@ -685,7 +685,63 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*90,position.y*72,WHITE);
+        DrawTexture(texture,position.x*475,position.y*75,WHITE);
+
+    }
+
+
+
+
+};
+class ee
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    ee()
+    {
+        Image image = LoadImage("gg/ee.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~ee()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*446,position.y*74,WHITE);
+
+    }
+
+
+
+
+};
+class qq
+{
+public :
+    Vector2 position ={2,6};
+    Texture2D texture;
+   
+
+    qq()
+    {
+        Image image = LoadImage("gg/qq.png");
+        texture = LoadTextureFromImage(image);
+        UnloadImage(image);
+
+    }
+    ~qq()
+    {
+        UnloadTexture(texture);
+    }
+    void Draw()
+    {
+        DrawTexture(texture,position.x*395,position.y*74,WHITE);
 
     }
 
@@ -741,6 +797,8 @@ int main ()
     ss3 Ss3 = ss3();
     ss4 Ss4 = ss4();
     ss5 Ss5 = ss5();
+    ee Ee = ee();
+    qq Qq = qq();
     game Game = game();
 
     while (WindowShouldClose () == false)
@@ -786,7 +844,7 @@ int main ()
             } while (newY == oldY);
             Rat.position.y = newY;
         }
-        //บน 60 กลาง 180 ล่าง 378
+        // บน 60 กลาง 180 ล่าง 378
         
         //3.Drawing
         BeginDrawing();
@@ -805,6 +863,8 @@ int main ()
         Rad3.Draw();
         Rad4.Draw();
         Rad5.Draw();
+        Ee.Draw();
+        Qq.Draw();
         // S1.Draw();
         // S2.Draw();
         // S3.Draw();
