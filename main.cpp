@@ -4,6 +4,9 @@
 using namespace std;
 Color darkgreen = {43,51,24,255};
 Color lightBlue = {226, 240, 243, 255};
+Color gold      = {255, 215, 0, 255};
+Color pink      = {255, 192, 203, 255};
+
 
 int cellSize = 30;
 // int cellSize2 = 9;
@@ -24,6 +27,27 @@ int getRandomYPosition()
 {
     int choices[3] = {50, 180, 360};
     return (float)choices[GetRandomValue(0, 2)];
+}
+
+// สร้างฟังก์ชันเพื่อสับค่าแบบไม่ซ้ำ และแจก 3 ค่า
+void getShuffledXPositions(int result[3])
+{
+    int choices[3] = {1000, 950, 900};
+
+    // สุ่มลำดับ (Fisher-Yates shuffle)
+    for (int i = 2; i > 0; i--)
+    {
+        int j = GetRandomValue(0, i);
+        int temp = choices[i];
+        choices[i] = choices[j];
+        choices[j] = temp;
+    }
+
+    // คัดลอกผลลัพธ์
+    for (int i = 0; i < 3; i++)
+    {
+        result[i] = choices[i];
+    }
 }
 
 class doraemon
@@ -80,7 +104,7 @@ public :
     }
     void Update_dora()
     {
-       position.x-=1;
+       position.x-=4;
         
     }
 
@@ -115,7 +139,7 @@ public :
     }
     void Update_nobe()
     {
-      position.x-=1;
+      position.x-=4;
         
     }
 
@@ -148,7 +172,7 @@ public :
     }
     void Update_rat()
     {
-       position.x-=1;
+       position.x-=6;
         
     }
 
@@ -237,7 +261,7 @@ public :
     }
     void Draw()
     {
-        DrawTexture(texture,position.x*60,position.y*5,WHITE);
+        DrawTexture(texture,position.x*60,position.y*4,WHITE);
 
     }
 
@@ -822,8 +846,12 @@ int main ()
             Doraemon.position.y=1.5;
         }
         cout<<Nobe.position.x<<endl;
-        if(Nobe.position.x<=60){
-            Nobe.position.x+=1000;
+
+        int xPositions[3];
+        getShuffledXPositions(xPositions);
+
+        if(Nobe.position.x<=55){
+            Nobe.position.x = xPositions[0];
             
             float oldY = Nobe.position.y;
             float newY;
@@ -832,8 +860,8 @@ int main ()
             } while (newY == oldY);
             Nobe.position.y = newY;
         }
-        if(Dora.position.x<=60){
-            Dora.position.x+=1000;
+        if(Dora.position.x<=55){
+            Dora.position.x = xPositions[1];
             float oldY = Dora.position.y;
             float newY;
             do {
@@ -842,8 +870,8 @@ int main ()
             Dora.position.y = newY;
             //cout<<Dora.position.x<<endl;
         }
-        if(Rat.position.x<=60){
-            Rat.position.x += 1000;
+        if(Rat.position.x<=55){
+            Rat.position.x = xPositions[2];
             float oldY = Rat.position.y;
             float newY;
             do {
@@ -856,7 +884,7 @@ int main ()
         //3.Drawing
         BeginDrawing();
 
-        ClearBackground(lightBlue);
+        ClearBackground(pink);
         Doraemon.Draw();
         Dora.Draw();
         Nobe.Draw();
