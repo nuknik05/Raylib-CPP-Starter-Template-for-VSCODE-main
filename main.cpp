@@ -22,7 +22,7 @@ bool evenTriggered(double interval)
 
 int getRandomYPosition()
 {
-    int choices[3] = {60, 160, 380};
+    int choices[3] = {50, 180, 360};
     return (float)choices[GetRandomValue(0, 2)];
 }
 
@@ -80,7 +80,7 @@ public :
     }
     void Update_dora()
     {
-       position.x-=0.01;
+       position.x-=1;
         
     }
 
@@ -115,7 +115,7 @@ public :
     }
     void Update_nobe()
     {
-      position.x-=0.01;
+      position.x-=1;
         
     }
 
@@ -148,7 +148,7 @@ public :
     }
     void Update_rat()
     {
-       position.x-=0.01;
+       position.x-=1;
         
     }
 
@@ -749,25 +749,25 @@ public :
 
 
 };
-class game{
-public:
-    doraemon Doraemon = doraemon();
-    dora Dora = dora();
-    nobe Nobe = nobe();
-    rat Rat = rat ();
-    che Che = che();
+// class game{
+// public:
+//     doraemon Doraemon = doraemon();
+//     dora Dora = dora();
+//     nobe Nobe = nobe();
+//     rat Rat = rat ();
+//     che Che = che();
 
-    void update(){
-        Dora.Update_dora();
-        Nobe.Update_nobe();
-        Rat.Update_rat();
-        Che.Update_che();
-    }
-    void CheckcollisionWithFood(){
-        //mon y 0 6 12
+//     void update(){
+//         Dora.Update_dora();
+//         Nobe.Update_nobe();
+//         Rat.Update_rat();
+//         Che.Update_che();
+//     }
+//     void CheckcollisionWithFood(){
+//         //mon y 0 6 12
         
-    }
-};
+//     }
+// };
 int main () 
 {
     cout << "starting the game..."<< endl;
@@ -799,24 +799,31 @@ int main ()
     ss5 Ss5 = ss5();
     ee Ee = ee();
     qq Qq = qq();
-    game Game = game();
+    // game Game = game();
 
     while (WindowShouldClose () == false)
     {
-        // if()
+        // if() 1.5 6 10.5
         if(evenTriggered(0.01)){
             Dora.Update_dora();
             Rat.Update_rat();
             Nobe.Update_nobe();
         }
         if(IsKeyPressed(KEY_W)){
-            Doraemon.position.y-=6;
+            Doraemon.position.y-=4.5;
         }
-        if(IsKeyPressed(KEY_S)){
-            Doraemon.position.y+=6;
+        else if(IsKeyPressed(KEY_S)){
+            Doraemon.position.y+=4.5;
         }
-        if(Nobe.position.x<=0.65){
-            Nobe.position.x+=8;
+        if(Doraemon.position.y<1.5){
+            Doraemon.position.y=10.5;
+        }
+        if(Doraemon.position.y>10.5){
+            Doraemon.position.y=1.5;
+        }
+        cout<<Nobe.position.x<<endl;
+        if(Nobe.position.x<=60){
+            Nobe.position.x+=1000;
             
             float oldY = Nobe.position.y;
             float newY;
@@ -825,8 +832,8 @@ int main ()
             } while (newY == oldY);
             Nobe.position.y = newY;
         }
-        if(Dora.position.x<=0.66){
-            Dora.position.x+=8;
+        if(Dora.position.x<=60){
+            Dora.position.x+=1000;
             float oldY = Dora.position.y;
             float newY;
             do {
@@ -835,8 +842,8 @@ int main ()
             Dora.position.y = newY;
             //cout<<Dora.position.x<<endl;
         }
-        if(Rat.position.x<=0.65){
-            Rat.position.x += 10;
+        if(Rat.position.x<=60){
+            Rat.position.x += 1000;
             float oldY = Rat.position.y;
             float newY;
             do {
@@ -886,5 +893,3 @@ int main ()
     return 0;
 
 }
-
-   
