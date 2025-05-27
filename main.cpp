@@ -25,16 +25,6 @@ int main()
     red3 Rad3 = red3();
     red4 Rad4 = red4();
     red5 Rad5 = red5();
-    s1 S1 = s1();
-    s2 S2 = s2();
-    s3 S3 = s3();
-    s4 S4 = s4();
-    s5 S5 = s5();
-    ss1 Ss1 = ss1();
-    ss2 Ss2 = ss2();
-    ss3 Ss3 = ss3();
-    ss4 Ss4 = ss4();
-    ss5 Ss5 = ss5();
     ee Ee = ee();
     qq Qq = qq();
     // game Game = game();
@@ -148,7 +138,7 @@ int main()
 
         BeginDrawing();
 
-        ClearBackground(lightBlue);
+        ClearBackground(pink);
         Doraemon.Draw();
         Dora.Draw();
         Nobe.Draw();
