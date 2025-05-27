@@ -96,7 +96,7 @@ int main()
                 _Inventory.Keep("Dorayaki");
             }
         }
-        else if (Rat.position.x <= 50)
+        else if (Rat.position.x <= 60)
         {
             Rat.position.x = xPositions[2];
             Rat.position.y =getRandomYPosition();
