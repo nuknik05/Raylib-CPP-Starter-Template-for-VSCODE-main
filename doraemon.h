@@ -81,9 +81,7 @@ using namespace std;
 Color darkgreen = {43, 51, 24, 255};
 Color lightBlue = {226, 240, 243, 255};
 Color pink      = {255, 192, 203, 255};
-int cellSize = 30;
-// int cellSize2 = 9;
-int cellCount = 25;
+
 double lastupdatetime = 0;
 
 bool evenTriggered(double interval)
