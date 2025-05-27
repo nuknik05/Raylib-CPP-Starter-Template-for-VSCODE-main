@@ -83,6 +83,7 @@ Color lightBlue = {226, 240, 243, 255};
 Color pink      = {255, 192, 203, 255};
 
 double lastupdatetime = 0;
+bool RunningGame;
 
 bool evenTriggered(double interval)
 {
@@ -122,6 +123,7 @@ void getShuffledXPositions(int result[3])
     }
 }
 
+
 class doraemon
 {
 public:
@@ -141,6 +143,10 @@ public:
     void Draw()
     {
         DrawTexture(texture, position.x * 20, position.y * 35, WHITE);
+    }
+    void Reset(){
+        position.x=2;
+        position.y=6;
     }
 };
 class dora // dorayaki

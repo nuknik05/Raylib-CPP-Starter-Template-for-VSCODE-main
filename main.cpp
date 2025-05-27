@@ -27,30 +27,27 @@ int main()
     red5 Rad5 = red5();
     ee Ee = ee();
     qq Qq = qq();
-    // game Game = game();
 
-    while (WindowShouldClose() == false && _HP.get_HP() > 0)
+    while (WindowShouldClose() == false ) //&& _HP.get_HP() > 0
     {
-        // if() 1.5 6 10.5
-        if (evenTriggered(0.01))
-        {
-            Dora.Update_dora();
-            Rat.Update_rat();
-            Nobe.Update_nobe();
+        //Game Start
+        if(IsKeyPressed(KEY_F)){
+            RunningGame=true;
         }
+        //Trigger and Update position
+        if (evenTriggered(0.01))
+        { if(RunningGame){
+            Dora.Update_dora();
+        
+            Rat.Update_rat();
+            Nobe.Update_nobe();}
+        }
+
+        //Control Doraemon move
         if (IsKeyPressed(KEY_W))
         {
             Doraemon.position.y -= 4.5;
         }
-        if (IsKeyPressed(KEY_Q))
-        {
-            if (_Inventory.get_dorayaki() > 0)
-            {
-                _HP.update_HP(1);
-                _Inventory.Use("Dorayaki");
-            }
-        }
-
         else if (IsKeyPressed(KEY_S))
         {
             Doraemon.position.y += 4.5;
@@ -64,61 +61,54 @@ int main()
             Doraemon.position.y = 1.5;
         }
 
+        if (IsKeyPressed(KEY_Q))
+        {
+            if ((_Inventory.get_dorayaki() > 0)&&_HP.get_HP()<5)
+            {
+                _HP.update_HP(1);
+                _Inventory.Use("Dorayaki");
+            }
+        }
+
         int xPositions[3];
         getShuffledXPositions(xPositions);
 
+        //Check position and Suffer X,Y Position and Check iteams that colleted
         if (Nobe.position.x <= 55)
         {
             Nobe.position.x = xPositions[0];
-
-            float oldY = Nobe.position.y;
-            float newY;
+            Nobe.position.y = getRandomYPosition();
             if (((Doraemon.position.y == 1.5) && (Nobe.position.y == 50)) || ((Doraemon.position.y == 6) && (Nobe.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Nobe.position.y == 360)))
             {
                 cout << "Give me a cheese pls Q-Q" << endl;
                 item = "cheese";
                 _Inventory.Keep("cheese");
             }
-            do
-            {
-                newY = getRandomYPosition();
-            } while (newY == oldY);
-            Nobe.position.y = newY;
         }
         else if (Dora.position.x <= 55)
         {
             Dora.position.x = xPositions[1];
-            float oldY = Dora.position.y;
-            float newY;
+            Dora.position.y =getRandomYPosition();
             if (((Doraemon.position.y == 1.5) && (Dora.position.y == 50)) || ((Doraemon.position.y == 6) && (Dora.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Dora.position.y == 360)))
             {
                 cout << "Yummy Dorayaki W-W" << endl;
                 item = "Dorayaki";
                 _Inventory.Keep("Dorayaki");
             }
-            do
-            {
-                newY = getRandomYPosition();
-            } while (newY == oldY);
-            Dora.position.y = newY;
-            // cout<<Dora.position.x<<endl;
         }
-        else if (Rat.position.x <= 60)
+        else if (Rat.position.x <= 50)
         {
             Rat.position.x = xPositions[2];
-            float oldY = Rat.position.y;
-            float newY;
+            Rat.position.y =getRandomYPosition();
+ 
             if (((Doraemon.position.y == 1.5) && (Rat.position.y == 50)) || ((Doraemon.position.y == 6) && (Rat.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Rat.position.y == 360)))
             {
 
                 _HP.update_HP(-3);
             }
-            do
-            {
-                newY = getRandomYPosition();
-            } while (newY == oldY);
-            Rat.position.y = newY;
+            
         }
+        
         // Kill RAT
         else if (Rat.position.x <= 200 && IsKeyPressed(KEY_E) && _Inventory.get_cheese() > 0)
         {
@@ -149,7 +139,21 @@ int main()
         Papa2.Draw();
 
         // HP state
-        if (_HP.get_HP() == 1)
+        if((_HP.get_HP() <= 0)){
+            RunningGame=false;
+            Doraemon.Reset();
+            
+            if(IsKeyPressed(KEY_F)){
+                RunningGame=true;
+                if(_HP.get_HP() ==0){
+                _HP.update_HP(5);}
+                else if(_HP.get_HP() ==-1){
+                _HP.update_HP(6);}
+                else if(_HP.get_HP() ==-2){
+                _HP.update_HP(7);}
+            }
+        }
+        else if (_HP.get_HP() == 1)
         {
             Rad5.Draw();
         }
@@ -179,8 +183,8 @@ int main()
             Rad2.Draw();
             Rad1.Draw();
         }
+        
 
-        Rad5.Draw();
         Ee.Draw();
         Qq.Draw();
         EndDrawing();
