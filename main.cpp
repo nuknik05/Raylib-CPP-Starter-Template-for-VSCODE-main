@@ -43,16 +43,50 @@ int main()
             Nobe.Update_nobe();}
         }
 
-        //Control Doraemon move
-        if (IsKeyPressed(KEY_W))
-        {
-            Doraemon.position.y -= 4.5;
+        int xPositions[3];
+        getShuffledXPositions(xPositions);
+
+        //Control Pressed Botton
+        switch (GetKeyPressed()) {
+        case KEY_W:
+        Doraemon.position.y -= 4.5;
+        break;
+        case KEY_S:
+        Doraemon.position.y += 4.5;
+        break;
+        case KEY_Q:
+        if ((_Inventory.get_dorayaki() > 0) && _HP.get_HP() < 5) {
+            _HP.update_HP(1);
+            _Inventory.Use("Dorayaki");
         }
-        else if (IsKeyPressed(KEY_S))
-        {
-            Doraemon.position.y += 4.5;
+        break;
+        case KEY_E:
+        if (Rat.position.x <= 500 && _Inventory.get_cheese() > 0) {
+            _Inventory.Use("cheese");
+            if (((Doraemon.position.y == 1.5) && (Rat.position.y == 50)) ||
+                ((Doraemon.position.y == 6) && (Rat.position.y == 180)) ||
+                ((Doraemon.position.y == 10.5) && (Rat.position.y == 360))) {
+                Rat.position.x = xPositions[2];
+                Rat.position.y = getRandomYPosition();
+            }
         }
-        else if (Doraemon.position.y < 1.5)
+        break;
+        case KEY_F:
+        if (_HP.get_HP() <= 0) {
+            RunningGame = true;
+            if (_HP.get_HP() == 0) {
+                _HP.update_HP(5);
+            } else if (_HP.get_HP() == -1) {
+                _HP.update_HP(6);
+            } else if (_HP.get_HP() == -2) {
+                _HP.update_HP(7);
+            }
+        }
+        break;
+        }
+
+        //Keep Doraemon in screen
+        if (Doraemon.position.y < 1.5)
         {
             Doraemon.position.y = 10.5;
         }
@@ -61,19 +95,7 @@ int main()
             Doraemon.position.y = 1.5;
         }
 
-        if (IsKeyPressed(KEY_Q))
-        {
-            if ((_Inventory.get_dorayaki() > 0)&&_HP.get_HP()<5)
-            {
-                _HP.update_HP(1);
-                _Inventory.Use("Dorayaki");
-            }
-        }
-
-        int xPositions[3];
-        getShuffledXPositions(xPositions);
-
-        //Check position and Suffer X,Y Position and Check iteams that colleted
+        //Check position and Suffer X,Y Position and Colleted iteams and Update HP
         if (Nobe.position.x <= 55)
         {
             if (((Doraemon.position.y == 1.5) && (Nobe.position.y == 50)) || ((Doraemon.position.y == 6) && (Nobe.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Nobe.position.y == 360)))
@@ -85,7 +107,7 @@ int main()
             Nobe.position.x = xPositions[0];
             Nobe.position.y = getRandomYPosition();
         }
-        if (Dora.position.x <= 55)
+        else if (Dora.position.x <= 55)
         {
             if (((Doraemon.position.y == 1.5) && (Dora.position.y == 50)) || ((Doraemon.position.y == 6) && (Dora.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Dora.position.y == 360)))
             {
@@ -96,7 +118,7 @@ int main()
             Dora.position.x = xPositions[1];
             Dora.position.y =getRandomYPosition();
         }
-        if (Rat.position.x <= 60)
+        else if (Rat.position.x <= 60)
         {
  
             if (((Doraemon.position.y == 1.5) && (Rat.position.y == 50)) || ((Doraemon.position.y == 6) && (Rat.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Rat.position.y == 360)))
@@ -118,8 +140,8 @@ int main()
                 Rat.position.y = getRandomYPosition();
             }
         }
+        //Drawing State
         BeginDrawing();
-
         ClearBackground(pink);
         Doraemon.Draw();
         Dora.Draw();
@@ -135,16 +157,6 @@ int main()
             RunningGame=false;
             Doraemon.Reset();
             _Inventory.Reset();
-            
-            if(IsKeyPressed(KEY_F)){
-                RunningGame=true;
-                if(_HP.get_HP() ==0){
-                _HP.update_HP(5);}
-                else if(_HP.get_HP() ==-1){
-                _HP.update_HP(6);}
-                else if(_HP.get_HP() ==-2){
-                _HP.update_HP(7);}
-            }
         }
         else if (_HP.get_HP() == 1)
         {
