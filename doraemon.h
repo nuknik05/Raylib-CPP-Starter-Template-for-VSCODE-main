@@ -128,35 +128,39 @@ void getShuffledXPositions(int result[3])
 }
 
 
-class doraemon
+class doraemon // ประกาศคลาสชื่อ doraemon ซึ่งแทนตัวละครโดราเอมอนในเกม
 {
-public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
+public: 
+    Vector2 position = {2, 6}; // กำหนดตำแหน่งเริ่มต้นของโดราเอมอนในพิกัด x=2, y=6
+    Texture2D texture; // ตัวแปรเก็บ texture (ภาพ) ที่จะใช้แสดงโดราเอมอน
 
-    doraemon()
+    doraemon()  // คอนสตรัคเตอร์: ทำงานอัตโนมัติเมื่อสร้างอ็อบเจ็กต์ doraemon
     {
-        Image image = LoadImage("gg/doraemon.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        Image image = LoadImage("gg/doraemon.png"); //โหลดภาพจากไฟล์ doraemon.png มาเก็บในตัวแปร image
+        texture = LoadTextureFromImage(image); // แปลง image เป็น texture เพื่อนำไปใช้ในการวาด
+        UnloadImage(image); // ลบ image ออกจากหน่วยความจำ (ไม่ต้องใช้แล้ว เพราะโหลดเป็น texture แล้ว)
     }
-    ~doraemon()
+    ~doraemon() // ดิสทรัคเตอร์: ทำงานเมื่ออ็อบเจ็กต์ถูกทำลาย เช่น ตอนออกจากโปรแกรม
     {
-        UnloadTexture(texture);
+        UnloadTexture(texture); // ลบ texture ออกจากหน่วยความจำ 
     }
-    void Draw()
+    void Draw() // ฟังก์ชันใช้วาดโดราเอมอนลงหน้าจอ
     {
+        // วาด texture ที่ตำแหน่ง position.x * 20, position.y * 35 และใช้สีขาวเป็นสีผสม (ไม่มีการเปลี่ยนสี)
         DrawTexture(texture, position.x * 20, position.y * 35, WHITE);
+        
+        
     }
-    void Reset(){
-        position.x=2;
-        position.y=6;
+    void Reset(){ // ฟังก์ชันรีเซ็ตตำแหน่งกลับเป็นจุดเริ่มต้น
+        position.x=2; // รีเซ็ตตำแหน่ง x เป็น 2
+        position.y=6; // รีเซ็ตตำแหน่ง y เป็น 6
+
     }
 };
-class dora // dorayaki
+class dora // ประกาศคลาสชื่อ dora แทนไอเทมโดรายากิในเกม
 {
-public:
-    Vector2 position = {300, 60};
+public: 
+    Vector2 position = {300, 60}; // กำหนดตำแหน่งเริ่มต้นของโดรายากิในพิกัด x=300, y=60
     Texture2D texture;
 
     dora()
