@@ -35,7 +35,7 @@ int main()
             RunningGame=true;
         }
         //Trigger and Update position
-        if (evenTriggered(0.01))
+        if (evenTriggered(0.0001))
         { if(RunningGame){
             Dora.Update_dora();
         
@@ -76,56 +76,48 @@ int main()
         //Check position and Suffer X,Y Position and Check iteams that colleted
         if (Nobe.position.x <= 55)
         {
-            Nobe.position.x = xPositions[0];
-            Nobe.position.y = getRandomYPosition();
             if (((Doraemon.position.y == 1.5) && (Nobe.position.y == 50)) || ((Doraemon.position.y == 6) && (Nobe.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Nobe.position.y == 360)))
             {
                 cout << "Give me a cheese pls Q-Q" << endl;
                 item = "cheese";
                 _Inventory.Keep("cheese");
             }
+            Nobe.position.x = xPositions[0];
+            Nobe.position.y = getRandomYPosition();
         }
-        else if (Dora.position.x <= 55)
+        if (Dora.position.x <= 55)
         {
-            Dora.position.x = xPositions[1];
-            Dora.position.y =getRandomYPosition();
             if (((Doraemon.position.y == 1.5) && (Dora.position.y == 50)) || ((Doraemon.position.y == 6) && (Dora.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Dora.position.y == 360)))
             {
                 cout << "Yummy Dorayaki W-W" << endl;
                 item = "Dorayaki";
                 _Inventory.Keep("Dorayaki");
             }
+            Dora.position.x = xPositions[1];
+            Dora.position.y =getRandomYPosition();
         }
-        else if (Rat.position.x <= 60)
+        if (Rat.position.x <= 60)
         {
-            Rat.position.x = xPositions[2];
-            Rat.position.y =getRandomYPosition();
  
             if (((Doraemon.position.y == 1.5) && (Rat.position.y == 50)) || ((Doraemon.position.y == 6) && (Rat.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Rat.position.y == 360)))
             {
-
                 _HP.update_HP(-3);
             }
+            Rat.position.x = xPositions[2];
+            Rat.position.y =getRandomYPosition();
             
         }
         
         // Kill RAT
-        else if (Rat.position.x <= 200 && IsKeyPressed(KEY_E) && _Inventory.get_cheese() > 0)
+        else if (Rat.position.x <= 500 && IsKeyPressed(KEY_E) && _Inventory.get_cheese() > 0)
         {
             _Inventory.Use("cheese");
             if (((Doraemon.position.y == 1.5) && (Rat.position.y == 50)) || ((Doraemon.position.y == 6) && (Rat.position.y == 180)) || ((Doraemon.position.y == 10.5) && (Rat.position.y == 360)))
             {
                 Rat.position.x = xPositions[2];
-                float oldY = Rat.position.y;
-                float newY;
-                do
-                {
-                    newY = getRandomYPosition();
-                } while (newY == oldY);
-                Rat.position.y = newY;
+                Rat.position.y = getRandomYPosition();
             }
         }
-
         BeginDrawing();
 
         ClearBackground(pink);
@@ -142,6 +134,7 @@ int main()
         if((_HP.get_HP() <= 0)){
             RunningGame=false;
             Doraemon.Reset();
+            _Inventory.Reset();
             
             if(IsKeyPressed(KEY_F)){
                 RunningGame=true;
@@ -183,7 +176,6 @@ int main()
             Rad2.Draw();
             Rad1.Draw();
         }
-        
 
         Ee.Draw();
         Qq.Draw();

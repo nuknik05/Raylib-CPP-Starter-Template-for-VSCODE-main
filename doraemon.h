@@ -60,6 +60,10 @@ public:
             dorayaki_ -= 1;
         }
     }
+    void Reset(){
+        cheese_=0;
+        dorayaki_=0;
+    }
 
     int get_dorayaki()
     {
@@ -465,3 +469,4 @@ public:
         DrawTexture(texture, position.x * 395, position.y * 74, WHITE);
     }
 };
+
