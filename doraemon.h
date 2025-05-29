@@ -3,12 +3,11 @@
 #include <vector>
 #include <raylib.h>
 
-class HP
+class HP // สำหรับเก็บค่า HP ของโดเรมอน
 {
 public:
     HP(int hp) : hp_(hp) {}
     ~HP() = default;
-    void Heart();
     void update_HP(int _val)
     {
         if (hp_ <= 5)
@@ -25,7 +24,7 @@ private:
     int hp_ = 5;
 };
 
-class Inventory : public HP
+class Inventory : public HP // กระเป๋าเก็บของ เพิ่ม / ลด โดรายากิ และชีสในกระเป๋า
 {
 public:
     Inventory(int dorayaki = 0, int cheese = 0, int hp = 5)
@@ -60,11 +59,11 @@ public:
             dorayaki_ -= 1;
         }
     }
-    void Reset(){
-        cheese_=0;
-        dorayaki_=0;
+    void Reset()
+    {
+        cheese_ = 0;
+        dorayaki_ = 0;
     }
-
     int get_dorayaki()
     {
         return dorayaki_;
@@ -84,7 +83,7 @@ private:
 using namespace std;
 Color darkgreen = {43, 51, 24, 255};
 Color lightBlue = {226, 240, 243, 255};
-Color pink      = {255, 192, 203, 255};
+Color pink = {255, 192, 203, 255};
 
 double lastupdatetime = 0;
 bool RunningGame;
@@ -111,10 +110,11 @@ void getShuffledXPositions(int result[3])
 {
     int choices[3] = {1000, 1100, 900};
 
-    // สุ่มลำดับ (Fisher-Yates shuffle)
+    // สุ่มลำดับ
     for (int i = 2; i > 0; i--)
     {
-        int j = GetRandomValue(0, i);
+        int j = GetRandomValue
+        (0, i);
         int temp = choices[i];
         choices[i] = choices[j];
         choices[j] = temp;
@@ -127,56 +127,68 @@ void getShuffledXPositions(int result[3])
     }
 }
 
-
-class doraemon // ประกาศคลาสชื่อ doraemon ซึ่งแทนตัวละครโดราเอมอนในเกม
+class display // รวมตำแหน่งของแต่ละรูป และการเปลี่ยนตำแหน่ง
 {
-public: 
-    Vector2 position = {2, 6}; // กำหนดตำแหน่งเริ่มต้นของโดราเอมอนในพิกัด x=2, y=6
-    Texture2D texture; // ตัวแปรเก็บ texture (ภาพ) ที่จะใช้แสดงโดราเอมอน
-
-    doraemon()  // คอนสตรัคเตอร์: ทำงานอัตโนมัติเมื่อสร้างอ็อบเจ็กต์ doraemon
-    {
-        Image image = LoadImage("gg/doraemon.png"); //โหลดภาพจากไฟล์ doraemon.png มาเก็บในตัวแปร image
-        texture = LoadTextureFromImage(image); // แปลง image เป็น texture เพื่อนำไปใช้ในการวาด
-        UnloadImage(image); // ลบ image ออกจากหน่วยความจำ (ไม่ต้องใช้แล้ว เพราะโหลดเป็น texture แล้ว)
-    }
-    ~doraemon() // ดิสทรัคเตอร์: ทำงานเมื่ออ็อบเจ็กต์ถูกทำลาย เช่น ตอนออกจากโปรแกรม
-    {
-        UnloadTexture(texture); // ลบ texture ออกจากหน่วยความจำ 
-    }
-    void Draw() // ฟังก์ชันใช้วาดโดราเอมอนลงหน้าจอ
-    {
-        // วาด texture ที่ตำแหน่ง position.x * 20, position.y * 35 และใช้สีขาวเป็นสีผสม (ไม่มีการเปลี่ยนสี)
-        DrawTexture(texture, position.x * 20, position.y * 35, WHITE);
-        
-        
-    }
-    void Reset(){ // ฟังก์ชันรีเซ็ตตำแหน่งกลับเป็นจุดเริ่มต้น
-        position.x=2; // รีเซ็ตตำแหน่ง x เป็น 2
-        position.y=6; // รีเซ็ตตำแหน่ง y เป็น 6
-
-    }
-};
-class dora // ประกาศคลาสชื่อ dora แทนไอเทมโดรายากิในเกม
-{
-public: 
-    Vector2 position = {300, 60}; // กำหนดตำแหน่งเริ่มต้นของโดรายากิในพิกัด x=300, y=60
+public:
+    float x_time = 0;
+    float y_time = 0;
+    Vector2 position = {0, 0};
     Texture2D texture;
-
-    dora()
+    display(const char *pic, float x, float y)
     {
-        Image image = LoadImage("gg/dora.png");
+        position = {x, y};
+        Image image = LoadImage(pic);
         texture = LoadTextureFromImage(image);
         UnloadImage(image);
-        position.y = getRandomYPosition();
+        DrawTexture(texture, x * x_time, y * y_time, WHITE);
+    }
+
+    int get_position_x()
+    {
+        return position.x;
+    }
+
+    int get_position_y()
+    {
+        return position.y;
+    }
+
+    void Draw()
+    {
+        DrawTexture(texture, position.x * x_time, position.y * y_time, WHITE);
+    }
+};
+
+class doraemon : public display // draw doraemon
+{
+public:
+    doraemon() : display("gg/doraemon.png", 2, 6)
+    {
+        x_time = 20;
+        y_time = 35;
+    }
+    ~doraemon()
+    {
+        UnloadTexture(texture);
+    }
+    void Reset()
+    {
+        position.x = 2;
+        position.y = 6;
+    }
+};
+
+class dora : public display // draw dorayaki
+{
+public:
+    dora() : display("gg/dora.png", 300, 60)
+    {
+        x_time = 1;
+        y_time = 1;
     }
     ~dora()
     {
         UnloadTexture(texture);
-    }
-    void Draw()
-    {
-        DrawTexture(texture, position.x, position.y, WHITE);
     }
     void Update_dora()
     {
@@ -184,293 +196,196 @@ public:
     }
 };
 
-class nobe // nobita
+class nobe : public display // draw nobita
 {
 public:
-    Vector2 position = {400, 200};
-    Texture2D texture;
-
-    nobe()
+    nobe() : display("gg/nobe.png", 400, 200)
     {
-        Image image = LoadImage("gg/nobe.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
-        position.y = getRandomYPosition();
+        x_time = 1;
+        y_time = 1;
     }
     ~nobe()
     {
         UnloadTexture(texture);
-    }
-    void Draw()
-    {
-        DrawTexture(texture, position.x, position.y, WHITE);
     }
     void Update_nobe()
     {
         position.x -= 4;
     }
 };
-class rat
+
+class rat : public display // draw rat
 {
 public:
-    Vector2 position = {600, 340};
-    Texture2D texture;
-
-    rat()
+    rat() : display("gg/rat.png", 600, 340)
     {
-        Image image = LoadImage("gg/rat.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
-        position.y = getRandomYPosition();
+        x_time = 1;
+        y_time = 1;
     }
     ~rat()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x, position.y, WHITE);
-    }
     void Update_rat()
     {
-        position.x -= 6;
+        position.x -= 9;
     }
 };
 
-class dora2
+class dora2 : public display // draw dorayaki
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    dora2()
+    dora2() : display("gg/dora2.png", 2, 6)
     {
-        Image image = LoadImage("gg/dora2.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 400;
+        y_time = 75;
     }
     ~dora2()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 400, position.y * 75, WHITE);
-    }
 };
-class che
+
+class che : public display // draw cheese
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    che()
+    che() : display("gg/che.png", 2, 6)
     {
-        Image image = LoadImage("gg/che.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 450;
+        y_time = 75;
     }
     ~che()
     {
         UnloadTexture(texture);
-    }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 450, position.y * 75, WHITE);
     }
     void Update_che()
     {
         position.x -= 1;
     }
 };
-class papa1
+
+class papa1 : public display // draw เส้นประ
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    papa1()
+    papa1() : display("gg/papa.png", 2, 6)
     {
-        Image image = LoadImage("gg/papa.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 60;
+        y_time = 5;
     }
     ~papa1()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 60, position.y * 5, WHITE);
-    }
 };
-class papa2
+
+class papa2 : public display // draw เส้นประ
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    papa2()
+    papa2() : display("gg/papa.png", 2, 6)
     {
-        Image image = LoadImage("gg/papa.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 60;
+        y_time = 30;
     }
     ~papa2()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 60, position.y * 30, WHITE);
-    }
 };
-class red1
+
+class red1 : public display // draw Heart
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    red1()
+    red1() : display("gg/red.png", 2, 6)
     {
-        Image image = LoadImage("gg/red.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 360;
+        y_time = 2;
     }
     ~red1()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 360, position.y * 2, WHITE);
-    }
 };
-class red2
+
+class red2 : public display // draw Heart
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    red2()
+    red2() : display("gg/red.png", 2, 6)
     {
-        Image image = LoadImage("gg/red.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 385;
+        y_time = 2;
     }
     ~red2()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 385, position.y * 2, WHITE);
-    }
 };
-class red3
+
+class red3 : public display // draw Heart
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    red3()
+    red3() : display("gg/red.png", 2, 6)
     {
-        Image image = LoadImage("gg/red.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 410;
+        y_time = 2;
     }
     ~red3()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 410, position.y * 2, WHITE);
-    }
 };
-class red4
+
+class red4 : public display // draw Heart
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    red4()
+    red4() : display("gg/red.png", 2, 6)
     {
-        Image image = LoadImage("gg/red.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 435;
+        y_time = 2;
     }
     ~red4()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 435, position.y * 2, WHITE);
-    }
 };
-class red5
+
+class red5 : public display // draw Heart
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    red5()
+    red5() : display("gg/red.png", 2, 6)
     {
-        Image image = LoadImage("gg/red.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 460;
+        y_time = 2;
     }
     ~red5()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 460, position.y * 2, WHITE);
-    }
 };
 
-class ee
+class ee : public display // E
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    ee()
+    ee() : display("gg/ee.png", 2, 6)
     {
-        Image image = LoadImage("gg/ee.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 446;
+        y_time = 74;
     }
     ~ee()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 446, position.y * 74, WHITE);
-    }
 };
-class qq
+
+class qq : public display // Q
 {
 public:
-    Vector2 position = {2, 6};
-    Texture2D texture;
-
-    qq()
+    qq() : display("gg/qq.png", 2, 6)
     {
-        Image image = LoadImage("gg/qq.png");
-        texture = LoadTextureFromImage(image);
-        UnloadImage(image);
+        x_time = 395;
+        y_time = 74;
     }
     ~qq()
     {
         UnloadTexture(texture);
     }
-    void Draw()
-    {
-        DrawTexture(texture, position.x * 395, position.y * 74, WHITE);
-    }
 };
-

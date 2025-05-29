@@ -61,7 +61,7 @@ int main()
         }
         break;
         case KEY_E:
-        if (Rat.position.x <= 500 && _Inventory.get_cheese() > 0) {
+        if (Rat.position.x <= 200 && _Inventory.get_cheese() > 0) {
             _Inventory.Use("cheese");
             if (((Doraemon.position.y == 1.5) && (Rat.position.y == 50)) ||
                 ((Doraemon.position.y == 6) && (Rat.position.y == 180)) ||
